@@ -20,6 +20,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import android.os.Handler;
+import android.util.Log;
 
 /**
  * Represents a RSS Feed
@@ -48,7 +49,9 @@ public class RSSFeed implements List<RSSItem> {
 		List<RSSItem> items = new ArrayList<RSSItem>();
 		Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new URL(feedUrl).openStream()));
 		NodeList nodeList = doc.getElementsByTagName("item");
+	
 		for (int i = 0; i < nodeList.getLength(); i++) {
+			
 			Node n = nodeList.item(i);
 			if (n instanceof Element) {
 				RSSItem item = new RSSItem((Element)n);
@@ -99,7 +102,7 @@ public class RSSFeed implements List<RSSItem> {
 				}
 			}
 				
-		});
+		}).start();
 	}
 	
 	@Override

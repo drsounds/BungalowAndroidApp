@@ -2,9 +2,9 @@
 <resources>
 
     <string name="app_name">Bungalow</string>
-    <string name="title_rss_news">News (RSS)</string>
-    <string name="title_scan_order">Order from QR code</string>
-    <string name="title_map">Places</string>
+    <string name="title_rss_news">Nyheter (RSS)</string>
+    <string name="title_scan_order">QR Beställning</string>
+    <string name="title_map">Platser</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>

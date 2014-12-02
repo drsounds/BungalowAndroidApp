@@ -10,13 +10,17 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -27,6 +31,20 @@ public class RssMonitorService extends Service {
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	/**
+	 * @from {@link http://stackoverflow.com/questions/6493517/detect-if-android-device-has-internet-connection}
+	 * @return
+	 */
+	public boolean isOnline() {
+	    Context context = this;
+	    ConnectivityManager cm = (ConnectivityManager) context
+	        .getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+	        return true;
+	    }
+	    return false;
 	}
 	Timer timer;
 	@Override
@@ -41,7 +59,9 @@ public class RssMonitorService extends Service {
 				Thread t = new Thread(new Runnable() {
 					@Override
 					public void run() {
-						
+						if (!RssMonitorService.this.isOnline()) {
+							return;
+						}
 						final SharedPreferences prefs = (SharedPreferences)PreferenceManager.getDefaultSharedPreferences(RssMonitorService.this);
 						String latestURI = prefs.getString("latestURI", null);
 						RSSFeed feed = new RSSFeed(null);

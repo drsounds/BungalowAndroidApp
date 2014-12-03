@@ -27,7 +27,7 @@ public class Place {
 	public Place(JSONObject object) throws JSONException {
 		this.geometry = object.getJSONObject("geometry");
 		
-		this.latLng = new LatLng(geometry.getJSONObject("location").getDouble("latitude"), geometry.getJSONObject("location").getDouble("longitude"));
+		this.latLng = new LatLng(geometry.getJSONObject("location").getDouble("lat"), geometry.getJSONObject("lng").getDouble("longitude"));
 		this.title = object.getString("name");
 	}
 }

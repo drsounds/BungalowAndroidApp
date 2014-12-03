@@ -15,7 +15,8 @@ public class RSSItemActivity extends WebActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		RSSItem item = (RSSItem)getIntent().getParcelableExtra("item");
-		loadUrl(item.getUrl());
+		String url = item.getUrl();
+		loadUrl(url);
 	}
 	
 }

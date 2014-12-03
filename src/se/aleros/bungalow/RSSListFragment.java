@@ -60,7 +60,8 @@ public class RSSListFragment extends Fragment implements RSSDownloadCompleteHand
 		
 
 		Intent i = new Intent(this.getActivity(), RSSItemActivity.class);
-		
-	}
+		i.putExtra("item", item);
+		startActivity(i);
+	}	
 	
 }

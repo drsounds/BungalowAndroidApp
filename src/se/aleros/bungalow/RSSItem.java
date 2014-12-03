@@ -25,7 +25,7 @@ public class RSSItem implements Comparable<RSSItem>, Parcelable {
 	public RSSItem (Parcel parcel) {
 		this.title = parcel.readString();
 		this.description = parcel.readString();
-		this.pubDate = new Date(parcel.readInt());
+		this.pubDate = new Date(parcel.readLong());
 		this.url = parcel.readString();
 	}
 	public static Parcelable.Creator<RSSItem> CREATOR = new Parcelable.Creator<RSSItem> () {
@@ -62,11 +62,8 @@ public class RSSItem implements Comparable<RSSItem>, Parcelable {
 	public RSSItem(Element element) {
 		this.title = RSSItem.getValue(element, "title");
 		this.setDescription(RSSItem.getValue(element, "description"));
-		
-		
-		
 		this.setPubDate((RSSItem.getValue(element, "pubDate")));
-		this.setUrl((RSSItem.getValue(element, "url")));
+		this.setUrl((RSSItem.getValue(element, "link")));
 		
 		
 	}
@@ -142,6 +139,7 @@ public class RSSItem implements Comparable<RSSItem>, Parcelable {
 		else
 			dest.writeLong(0);
 		dest.writeString(url);
+		
 	}
 	public Date getTime() {
 		return time;

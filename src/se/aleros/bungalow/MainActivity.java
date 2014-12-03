@@ -1,5 +1,8 @@
 package se.aleros.bungalow;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -60,8 +63,18 @@ public class MainActivity extends Activity
     		fragmentManager.beginTransaction()
                 .replace(R.id.container,new RSSListFragment())
                 .commit();
-    	}
     		break;
+    	}
+    	case 1: {
+    		MapFragment mapFragment = new BungalowMapFragment();
+    		FragmentManager fragmentManager = getFragmentManager();
+    		fragmentManager.beginTransaction()
+                .replace(R.id.container, mapFragment)
+                .commit();
+    		GoogleMap map = ((MapFragment)mapFragment).getMap();
+    		
+    		break;
+    	}
     	}
     	
     }
@@ -72,10 +85,10 @@ public class MainActivity extends Activity
                 mTitle = getString(R.string.title_rss_news);
                 break;
             case 2:
-                mTitle = getString(R.string.title_scan_order);
+                mTitle = getString(R.string.title_map);
                 break;
             case 3:
-                mTitle = getString(R.string.title_map);
+                mTitle = getString(R.string.title_scan_order);
                 break;
         }
     }
